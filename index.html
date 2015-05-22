@@ -1,0 +1,420 @@
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Intuition.js</title>
+
+
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <link rel="stylesheet" href="highlight/styles/monokai_sublime.css"/>
+  <script src="highlight/highlight.pack.js"></script>
+  <style>
+  body {font-size:200%;}
+  </style>
+</head>
+
+<body style="background-color: #222;">
+
+    <div class="container" style="background-color:#E2E2E2;">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#_about">About</a></li>
+            <li><a href="#_showcase">Showcase</a></li>
+            <li><a href="#_getting">Getting started</a></li>
+            <li><a href="#_api">API</a></li>
+            <li><a href="#_todo">ToDo</a></li>
+            <li><a href="#_showcase">GitHub</a></li>
+            <li><a href="#_contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <img src="images/139.gif"/ width="100%" style="margin-top:65px;margin-bottom:15px">
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron" id="jumbo" style=";color: #fff;background: #222;">
+      <h1>Intuition.js</h1>
+      <p>HTML5 / Canvasのビジュアルプログラミングフレームワーク</p>
+      <p>独特なコーディングフローで瞬間ビジュアライズ</p>
+      <p>プレイグラウンド用途に特化することで、直感的なコーディングが可能。（多分）</p>
+      <p>速度・加速度などをデフォルトで採用 → Update( )の記述が極度に少ない</p>
+      <p>
+        github: <a href="#">http://github.io/intuitionjs</a>
+      </p>
+    </div>
+
+    <h4>↓Canvasで動作中</h4>
+    <canvas id="playground" style="background-color:#DADADA;margin-bottom:30px;" width="400" height="200" /></canvas>
+
+<pre><code class="github">
+var start = function(){
+
+  var ball = make(v(0,0),v(2,0),v(0,0.044)); // 位置・速度・加速度
+  ball.pong = true; // 跳ね返る
+
+  var obj = make(v(330,0),v(-1,0.3)); // 位置・速度
+  obj.edge = true; // 反対側の端から折り返す
+
+};
+
+var update = function(){
+  //なし
+};
+</code></pre>
+
+
+  <p id="_about" style="visibility:hidden;">.</p>
+  <h2>About</h2>
+  <p>・HTML5/Canvas上で動作するビジュアルプログラミングフレームワーク</p>
+  <p>・独特なコーディングフローでCanvasの描画ルーティンワークをカット</p>
+  <p>・プレイグラウンド用途（勉強、試し打ち、練習...etc）に特化</p>
+  <p>・すべてのThing（基本オブジェクト）には位置・速度・加速度がある。</p>
+  <p>・位置、速度、加速度はすべてベクトル（Vec2）で表現する</p></br>
+
+  <p>■ Intutionフロー
+  <p>・intuition() でお手軽オブジェクト生成・描画（引数なしでもサクっと(0,0)に●登場）</p>
+  <p>・生成されたオブジェクトのすべては_thingsという変数に自動的に格納</p>
+  <p>・毎フレームそれらのオブジェクトが位置・速度・加速度に応じて勝手に動く</p>
+  <p>・オブジェクトはあまりに端にいったら（画面の見えないところから1000）自動的に消える</p></br>
+
+  <p>■ カスタマイズ</br>
+  <p>・intuition(位置,速度,加速度)でそれぞれ位置・速度・加速度付きのオブジェクト生成</p>
+  <p>・intuition(位置,速度)でそれぞれ位置・速度付きのオブジェクト生成</p>
+  <p>・intuition(位置)で位置のみ付いたオブジェクト生成</p>
+  <p>・画像がなくてもデフォルトの●が勝手にセット。ただし、obj.setImage("hoge.png")のようにセットもできる。</p>
+  <p>・obj.pos.x , obj.vel.x , obj.acc.xといった具合にそれぞれのプロパティにアクセス可能</p>
+  <p>・obj.scale.xといったようにすべてのThingにはVec2のサイズがあり、いじれる。</p>
+  <p>・obj.edgeをtrueにすれば端に行った時に自動で反対側かが出てくる。</p>
+  <p>・obj.pongをtrueにすれば端に行った時に自動で跳ね返る。</p>
+
+  <p id="_getting" style="visibility:hidden;">.</p>
+  <h2>Getting started</h2>
+  <p>ファイルはindex.htmlとituition.jsとplayground.js。playground.js内にコードを書いていきましょう。</br>start( )とupdate( )が基本です。詳しくはShowcaseをみて何となく掴みましょう。(todo)</p>
+
+
+  <p id="_showcase" style="visibility:hidden;">.</p>
+  <h2>Showcase</h2>
+
+    <hr>
+    <h4>●の生成（ナチュラル）</h4>
+    <img src="images/141.gif"/ width="100%">
+    <pre><code class="github">
+      var start = function(){
+        var ball = make();
+      };
+    </code></pre>
+
+    <hr>
+    <h4>●の生成（位置付き）</h4>
+    <img src="images/142.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+      var ball = make(v(50,50));
+      make(v(150,150));
+    };
+    </code></pre>
+
+
+    <hr>
+    <h4>●の生成（速度付き）</h4>
+    <img src="images/143.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+      var ball = make(v(50,50),v(1,0));
+    };
+    </code></pre>
+
+
+    <hr>
+    <h4>●の生成（加速度付き）</h4>
+    <img src="images/144.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+      var ball = make(v(50,50),v(0,0),v(0.03,0));
+    };
+    </code></pre>
+
+
+    <hr>
+    <h4>●の生成（updateで制御）</h4>
+    <img src="images/145.gif"/ width="100%">
+    <pre><code class="github">
+    var obj;
+    var start = function(){
+      obj = make();
+    };
+
+    var update = function(){
+      obj.pos.x += 1;
+    };
+    </code></pre>
+
+
+    <hr>
+    <h4>端で折り返す</h4>
+    <img src="images/137.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+      var obj = make(v(0,0),v(1,2));
+      obj.edge = true;
+    };
+    </code></pre>
+
+
+    <hr>
+    <h4>バウンド</h4>
+    <img src="images/147.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+      var ball = make(v(10,50),v(0,0),v(0.05,0));
+      ball.pong = true;
+    }
+    </code></pre>
+
+    <hr>
+    <h4>画像の差し替え</h4>
+    <img src="images/135.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+      var sprite = make(v(350,0));
+      sprite.setImage("circle.png");
+    };
+
+    var update = function(){
+     //なし
+    };
+    </code></pre>
+
+    <hr>
+    <h4>サイン波</h4>
+    <img src="images/138.gif"/ width="100%">
+    <pre><code class="github">
+    var obj;
+    var degree = 0;
+    var rad = 0;
+
+    var start = function(){
+      obj = make();
+      obj.edge = true;
+    };
+
+    var update = function(){
+      obj.pos.x += 1;
+
+      degree += 1;
+      rad = degree * Math.PI / 180;
+      obj.pos.y = Math.sin(rad) * 80 + 100;
+
+    };
+    </code></pre>
+
+
+    <hr>
+    <h4>円軌道</h4>
+    <img src="images/140.gif"/ width="100%">
+    <pre><code class="github">
+    var obj;
+    var degree = 0;
+    var rad = 0;
+    var center = v(450,100);
+    var r = 80;
+
+    var start = function(){
+      obj = make();
+      obj.edge = true;
+    };
+
+    var update = function(){
+      degree += 1;
+      rad = degree * Math.PI / 180;
+      obj.pos.x = Math.cos(rad) * r + center.x;
+      obj.pos.y = Math.sin(rad) * r + center.y;
+    };
+    </code></pre>
+
+    <hr>
+    <h4>粒子のようなバウンドオブジェクト1000個</h4>
+    <img src="images/133.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+
+      for(var i=0;i<1000;i++){
+        var obj = make(
+                    v(rand(450),rand(300)),
+                    v(1+rand(1),1+rand(1)),
+                    v(0,0.0)
+                  );
+
+        obj.gravity = 0.07;
+        obj.pong = true;
+      }
+    };
+
+    var update = function(){
+      //なし
+    };
+
+    rand = function(num){
+      return Math.random() * num;
+    }
+    </code></pre>
+
+    <hr>
+    <h4>網み目</h4>
+    <img src="images/134.gif"/ width="100%">
+    <pre><code class="github">
+    var start = function(){
+      var y = 0;
+      var x = 0;
+
+      for(var i=0;i<100;i++){
+        if(i % 5 == 0){
+          y++;
+          x = 0;
+        }
+        x++;
+
+        var obj = make(v(x * 98 + y % 2 * 50, y * 30),v(1,1.5));
+
+      obj.pong = true;
+      }
+    };
+
+    var update = function(){
+      //なし
+    };
+    </code></pre>
+
+
+    <hr>
+    <h4>横切る何か</h4>
+    <img src="images/136.gif"/ width="100%">
+    <pre><code class="github">
+    var num = 0.11;
+    var NUMBEROFTHINGS = 40;
+
+    var start = function(){
+      for(var i=0;i < NUMBEROFTHINGS;i++){
+        var densha = make(v(130,30));
+        densha.setImage("circle.png");
+      }
+    };
+
+    var update = function(){
+      num *= 1.01;
+      for(var i=0;i<NUMBEROFTHINGS;i++){
+        _things[i].setScale(v(num/i - i*1.9,num -i*0.2));
+      }
+      if(num > 20000)num = 0.11;
+    };
+    </code></pre>
+
+
+
+
+
+    <hr>
+    <h4>弾幕</h4>
+    <img src="images/139.gif"/ width="100%">
+    <pre><code class="github">
+    var DANMAKUNUM = 30;
+    var DANMAKUDEGREEINC = 12;
+    var DANMAKUINTERVAL = 50;
+    var timerCurrent = 0;
+    var timerMax = DANMAKUINTERVAL;
+
+
+    var start = function() {
+
+      for(var i =0; i < DANMAKUNUM;i++){
+        make(v(200,120));
+        _things[i].angle = i * DANMAKUDEGREEINC +45;
+        _things[i].vel.x = Math.cos(Math.PI / 180 * _things[i].angle) * 1;
+        _things[i].vel.y = Math.sin(Math.PI / 180 * _things[i].angle) * 1;
+      }
+
+    }
+
+    var update = function(){
+    timerCurrent++;
+      if(timerCurrent >= timerMax){
+        for(var i =0; i < DANMAKUNUM;i++){
+          var bullet = make(v(200,120));
+          bullet.angle = i * DANMAKUDEGREEINC +45;
+          bullet.vel.x = Math.cos(Math.PI / 180 * bullet.angle) * 1;
+          bullet.vel.y = Math.sin(Math.PI / 180 * bullet.angle) * 1;
+        }
+        timerCurrent = 0;
+      }
+    };
+    </code></pre>
+
+  <p id="_api" style="visibility:hidden;">.</p>
+  <h2>API</h2>
+  <p>準備中（Showcaseをみて何となく掴んでください・・・）</p>
+
+  <p id="_todo" style="visibility:hidden;">.</p>
+  <h2>To Do</h2>
+  <p>・DL→プログラミング開始までをスマートにしたい</p>
+  <p>・Steering Behaviours（操舵行動）を取り入れる</p>
+  <p>・壁を作れる。（弾力も決められる）</p>
+  <p>・ノイズ関数 </p>
+  <p>・line関数</p>
+  <p>・シンプルなランダム関数( random(min,max)とか )</p>
+  <p>・シンプルなあたり判定（重い&開発中）</p>
+  <p>・摩擦力・風力のように加速度や速度に影響を及ぼす要素</p>
+  <p>・便利すぎる機能は入れない方針（MoveToなどのTween系とか、乱数の偏差とか）</p>
+  <p>・jQueryを分析する</p>
+  <p>・グローバル汚染を防ぎたい。（でもこれはプレイグラウンド用だぜ？）</p>
+  <p>・ちゃんとOSSっぽいパッケージを作る</p>
+  <p>・API一覧</p>
+
+  <p id="_contact" style="visibility:hidden;">.</p>
+  <h2>Contact</h2>
+  <p>hp0isme(at)gmail.com</p>
+  <p>(2015.0525) 全くの思いつきで、ライブラリの作り方もまともに知らない中（Flying Lotusを聴きながら）スタート</br>
+  JSについて、OSSについて分からないことが多すぎるので、アドバイス・プルリクなどお待ちしております。。</p>
+
+
+    </div> <!-- /container -->
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      $("#playground").attr({width:$(".container").width()});
+    </script>
+    <script src="intuition.js"></script>
+    <script src="playground.js"></script>
+</body>
+</html>
