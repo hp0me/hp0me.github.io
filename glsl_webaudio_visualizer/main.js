@@ -21,7 +21,11 @@ window.onload = function(){
 	var source;
 
 	//Youtubeの音を拾う
-	navigator.webkitGetUserMedia (
+  navigator.getUserMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+	navigator.getUserMedia (
 	  {
 	     audio: true
 	  },
