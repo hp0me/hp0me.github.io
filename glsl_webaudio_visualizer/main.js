@@ -92,18 +92,15 @@ window.onload = function(){
     //音域の総和を得る
     var dNum = 0;
     for(var i = 0; i < dataArray.length;i++){
-      dataArray[i] *= 2.5;
+      dataArray[i] *= 2.5; //増幅させる
       dNum += dataArray[i];
     }
 
     //青は、総和をビジュアライズする
     var blue = dNum * 0.00023;
-    //var blue = dNum * 0.0001 + 0.4;
-
 
     //赤は特定の音域のみ拾う
     var red = dataArray[6] * 0.002;
-    //var red = 0;
 
     //◯の軌道。低い時は戻るようにする
     var vr = dataArray[6] * 0.0003;
@@ -114,14 +111,8 @@ window.onload = function(){
       vr += 0.04;
     }
 
-    //vr > 0.08 ? blueCount++:blueCount=0;
-    //if(blueCount > 3)red  = dataArray[5] * 0.003;
-
     //◯の大きさは青に比例する
     var circleSize = red * 0.01 +  blue * 0.04;
-
-
-    console.log(vr);
     rad += vr;
 
     gl.clear(gl.COLOR_BUFFER_BIT);
